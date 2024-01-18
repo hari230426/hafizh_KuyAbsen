@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2020 at 08:21 AM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.2.31
+-- Generation Time: Jan 02, 2024 at 06:23 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_absensi`
+-- Database: `kuyabsen`
 --
 
 -- --------------------------------------------------------
@@ -31,15 +31,26 @@ CREATE TABLE `gedung` (
   `gedung_id` int(11) NOT NULL,
   `nama_gedung` varchar(50) NOT NULL,
   `alamat` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `gedung`
 --
 
 INSERT INTO `gedung` (`gedung_id`, `nama_gedung`, `alamat`) VALUES
-(12, 'LOKASI 1', 'Alamat 1'),
-(13, 'LOKASI 2', 'Alamat 2');
+(14, 'X RPL', '(10) REKAYASA PERANGKAT LUNAK'),
+(15, 'XI RPL', '(11) REKAYASA PERANGKAT LUNAK'),
+(16, 'XII RPL', '(12) REKAYASA PERANGKAT LUNAK'),
+(17, 'X MP', '(10) MANAGEMENT PERKANTORAN'),
+(18, 'XI MP 1', '(11) MANAGEMENT PERKANTORAN\'2\''),
+(19, 'XI MP 2', '(11) MANAGEMENT PERKANTORAN\'1\''),
+(20, 'XII MP', '(12) MANAGEMENT PERKANTORAN'),
+(21, 'X AK', '(10) AKUNTANSI'),
+(22, 'XI AK', '(11) AKUNTANSI'),
+(23, 'XII AK', '(12) AKUNTANSI'),
+(24, 'X BD', '(10) BISNIS DARING'),
+(25, 'XI BD', '(11) BISNIS DARING'),
+(26, 'XII BD', '(12) BISNIS DARING');
 
 -- --------------------------------------------------------
 
@@ -51,7 +62,7 @@ CREATE TABLE `groups` (
   `id` mediumint(8) UNSIGNED NOT NULL,
   `name` varchar(20) NOT NULL,
   `description` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `groups`
@@ -59,7 +70,8 @@ CREATE TABLE `groups` (
 
 INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 (1, 'admin', 'Administrator'),
-(3, 'Operator', 'Operator');
+(3, 'operator', 'operator'),
+(4, 'scan', 'scanner');
 
 -- --------------------------------------------------------
 
@@ -70,15 +82,15 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 CREATE TABLE `jabatan` (
   `id_jabatan` int(11) NOT NULL,
   `nama_jabatan` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `jabatan`
 --
 
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
-(5, 'STAFF'),
-(6, 'MANAJER');
+(5, 'PEREMPUAN'),
+(6, 'LAKI LAKI');
 
 -- --------------------------------------------------------
 
@@ -93,16 +105,42 @@ CREATE TABLE `karyawan` (
   `jabatan` int(11) NOT NULL,
   `id_shift` int(20) NOT NULL,
   `gedung_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data for table `karyawan`
 --
 
 INSERT INTO `karyawan` (`id`, `id_karyawan`, `nama_karyawan`, `jabatan`, `id_shift`, `gedung_id`) VALUES
-(129, 'S2008001', 'Karyawan 1', 5, 5, 12),
-(130, 'M2008129', 'Karyawan 2', 6, 6, 12),
-(131, 'S2008130', 'Karyawan 3', 5, 5, 12);
+(137, 'L2311001', 'ARIEF RACHMAN', 6, 12, 15),
+(138, 'P2311137', 'BILQIS PUTRI DELENA', 5, 12, 15),
+(139, 'P2311138', 'DINDA AYU APRILYANI', 5, 12, 15),
+(140, 'L2311139', 'FADHIL ANWAR RIZKY', 6, 12, 15),
+(141, 'L2311140', 'FERIYANSYAH', 6, 12, 15),
+(142, 'L2311141', 'FICKRY ASKA HIDAYAT', 6, 12, 15),
+(144, 'L2311143', 'HAFIZH RAHMAN IBRAHIM', 6, 12, 15),
+(145, 'L2311144', 'HILMI HIDAYATULLAH', 6, 12, 15),
+(146, 'L2311145', 'PANDU PRASETYO', 6, 12, 15),
+(147, 'L2311146', 'KEVIN ANANDIPA', 6, 12, 15),
+(148, 'L2311147', 'MUHAMAD ALWI NURRAHMAN', 6, 12, 15),
+(149, 'L2311148', 'MUHAMAD FAHRAEL FADHILA TAMAM', 6, 12, 15),
+(150, 'L2311149', 'MUHAMAD FATHUR RIDHO', 6, 12, 15),
+(151, 'L2311150', 'MUHAMAD HAVIS ZAKARYA', 6, 12, 15),
+(152, 'L2311151', 'MUHAMAD RAIHAN AMIN', 6, 12, 15),
+(153, 'L2311152', 'MUHAMMAD RIDWAN', 6, 12, 15),
+(154, 'L2311153', 'MUHAMMMAD RAFU AKBAR FADILAH', 6, 12, 15),
+(155, 'P2311154', 'JEZY CAHYA MUSTIKA', 5, 12, 15),
+(156, 'L2311155', 'RADITYA KUSUMA', 6, 12, 15),
+(157, 'P2311156', 'RAHMA SASKIA HASIBUAN', 5, 12, 15),
+(158, 'L2311157', 'RHASYA ANDRIYAS', 6, 12, 15),
+(159, 'L2311158', 'RIZALDI ARIEF', 6, 12, 15),
+(160, 'P2311159', 'SITI NURAENI', 5, 12, 15),
+(161, 'P2311160', 'SITI NURMALA GUNAWAN', 5, 12, 15),
+(162, 'P2311161', 'SYIFA AZZAHRA', 5, 12, 15),
+(163, 'L2311162', 'YOGA HENDRAWAN', 6, 12, 15),
+(164, 'L2311163', 'ZACKY PRIMANANDA', 6, 12, 15),
+(165, 'L2311164', 'IRVAN JULIUS PANJAITAN', 6, 12, 15),
+(166, 'L2311165', 'JOSE MARIO SCHNAYGER KERAMATA', 6, 12, 15);
 
 -- --------------------------------------------------------
 
@@ -113,7 +151,7 @@ INSERT INTO `karyawan` (`id`, `id_karyawan`, `nama_karyawan`, `jabatan`, `id_shi
 CREATE TABLE `kehadiran` (
   `id_khd` int(11) NOT NULL,
   `nama_khd` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `kehadiran`
@@ -137,7 +175,17 @@ CREATE TABLE `login_attempts` (
   `ip_address` varchar(45) NOT NULL,
   `login` varchar(100) NOT NULL,
   `time` int(11) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `login_attempts`
+--
+
+INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
+(15, '::1', 'fadhil@fadhil.com', 1703300361),
+(16, '::1', 'fadhil@fadhil.com', 1703300372),
+(17, '::1', 'fadhil@fadhil.com', 1703300373),
+(18, '::1', 'fadhil@fadhil.com', 1703301124);
 
 -- --------------------------------------------------------
 
@@ -154,7 +202,7 @@ CREATE TABLE `menu` (
   `is_active` int(1) NOT NULL,
   `is_parent` int(1) UNSIGNED NOT NULL,
   `sort` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `menu`
@@ -163,10 +211,10 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` (`id`, `name`, `link`, `icon`, `protected`, `is_active`, `is_parent`, `sort`) VALUES
 (15, 'menu management', 'menu', 'fa fa-list-alt', NULL, 1, 42, 14),
 (16, 'master data', 'sdf', 'fa fa-folder', NULL, 1, 0, 1),
-(18, 'Data Karyawan', 'Data Anggota', 'fa fa-user', NULL, 1, 16, 2),
-(19, 'data Jabatan', 'jabatan', 'fa fa-briefcase', NULL, 1, 16, 3),
-(21, 'Data Shift', 'shift', 'fa fa-retweet', NULL, 1, 16, 4),
-(22, 'data Lokasi', 'lokasi', 'fa fa-location-arrow', NULL, 1, 16, 5),
+(18, 'Data Siswa/i', 'karyawan', 'fas fa-user-circle', NULL, 1, 16, 2),
+(19, 'Gender', 'jabatan', 'fas fa-venus-mars', NULL, 1, 16, 3),
+(21, 'Jurusan', 'shift', 'fas fa-suitcase', NULL, 1, 16, 4),
+(22, 'Kelas', 'lokasi', 'fas fa-door-open', NULL, 1, 16, 5),
 (31, 'Ambil QR Code', 'GenBar', 'fa fa-qrcode', NULL, 1, 0, 6),
 (33, 'Scan QRCODE', 'scan', 'fa fa-search-plus', NULL, 1, 0, 7),
 (35, 'User management', 'users', 'fa fa-users', NULL, 1, 42, 13),
@@ -190,14 +238,36 @@ CREATE TABLE `presensi` (
   `id_khd` int(11) DEFAULT NULL,
   `ket` varchar(150) NOT NULL,
   `id_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `presensi`
 --
 
 INSERT INTO `presensi` (`id_absen`, `id_karyawan`, `tgl`, `jam_msk`, `jam_klr`, `id_khd`, `ket`, `id_status`) VALUES
-(64, 'S2008001', '2020-08-02', '12:52:43', '12:52:46', 1, '', 2);
+(64, 'S2008001', '2020-08-02', '12:52:43', '12:52:46', 1, '', 2),
+(75, 'L2311143', '2023-11-25', '08:05:59', '08:08:43', 1, '', 2),
+(76, 'L2311139', '2023-11-25', '09:40:58', '09:40:59', 1, '', 2),
+(77, 'L2311149', '2023-12-09', '07:44:26', '00:00:00', 1, '', 2),
+(78, 'L2311143', '2023-12-09', '08:03:21', '00:00:00', 1, '', 1),
+(79, 'L2311157', '2023-12-09', '11:39:40', '00:00:00', 1, '', 1),
+(80, 'L2311165', '2023-12-23', '09:12:29', '09:12:29', 1, '', 2),
+(81, 'L2311162', '2023-12-23', '09:13:43', '09:13:43', 1, '', 2),
+(82, 'P2311161', '2023-12-23', '09:15:37', '09:15:37', 1, '', 2),
+(83, 'P2311160', '2023-12-23', '09:15:46', '09:15:46', 1, '', 2),
+(84, 'L2311163', '2023-12-23', '09:20:30', '09:20:30', 1, '', 2),
+(85, 'L2311157', '2023-12-23', '09:20:43', '09:20:43', 1, '', 2),
+(86, 'L2311158', '2023-12-23', '09:20:52', '00:00:00', 1, '', 1),
+(87, 'P2311156', '2023-12-23', '09:21:08', '09:21:08', 1, '', 2),
+(88, 'L2311155', '2023-12-23', '09:21:24', '10:34:33', 1, '', 2),
+(89, 'P2311154', '2023-12-23', '09:21:31', '09:21:31', 1, '', 2),
+(90, 'L2311153', '2023-12-23', '09:21:58', '09:21:58', 1, '', 2),
+(91, 'L2311144', '2023-12-23', '09:31:54', '09:31:55', 1, '', 2),
+(92, 'L2311145', '2023-12-23', '09:32:03', '00:00:00', 1, '', 1),
+(93, 'L2311146', '2023-12-23', '09:32:43', '00:00:00', 1, '', 1),
+(94, 'L2311001', '2023-12-23', '10:34:50', '10:34:51', 1, '', 2),
+(95, 'P2311137', '2023-12-23', '10:36:29', '10:36:29', 1, '', 2),
+(96, 'P2311138', '2023-12-23', '10:36:37', '11:04:36', 1, '', 2);
 
 -- --------------------------------------------------------
 
@@ -208,16 +278,17 @@ INSERT INTO `presensi` (`id_absen`, `id_karyawan`, `tgl`, `jam_msk`, `jam_klr`, 
 CREATE TABLE `shift` (
   `id_shift` int(11) NOT NULL,
   `nama_shift` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `shift`
 --
 
 INSERT INTO `shift` (`id_shift`, `nama_shift`) VALUES
-(5, 'SHIFT 1'),
-(6, 'SHIFT 2'),
-(7, 'SHIFT 3');
+(10, 'MANAGEMENT PERKANTOR'),
+(11, 'BISNIS DARING'),
+(12, 'REKAYASA PERANGKAT'),
+(13, 'AKUNTANSI');
 
 -- --------------------------------------------------------
 
@@ -228,7 +299,7 @@ INSERT INTO `shift` (`id_shift`, `nama_shift`) VALUES
 CREATE TABLE `stts` (
   `id_status` int(11) NOT NULL,
   `nama_status` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `stts`
@@ -265,17 +336,21 @@ CREATE TABLE `users` (
   `last_name` varchar(50) DEFAULT NULL,
   `company` varchar(100) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(26, '::1', 'admin@admin.com', '$2y$12$MPcQlOck9fzd/5UjJ6iIXuhZivhkXdfoVD2xFXpZTnZ2IWQw/nFhW', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1556798313, 1596349119, 1, 'admin', 'nistator', NULL, '123412341234'),
+(26, '::1', 'admin@admin.com', '$2y$12$MPcQlOck9fzd/5UjJ6iIXuhZivhkXdfoVD2xFXpZTnZ2IWQw/nFhW', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1556798313, 1703304833, 1, 'Rizal', 'si admin', NULL, '123412341234'),
 (34, '::1', 'jefrimaruli@gmail.com', '$2y$12$yt3Qu8yQzdT3zYSgbDyDsOCi6d6TMtIrCTzB.nJaruVCO5hDMdtm2', 'jefrimaruli@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1560355548, 1560524242, 1, 'Jeff', 'Maruli', NULL, '9832349234'),
-(46, '::1', 'operator@operator.com', '$2y$10$ibxBt.RYG7jib0JxBxB1.usc9pzjqUqPPTvwLgPp1gMRKg6VMLLei', 'operator@operator.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1562178403, 1596347698, 1, 'operator', '2', NULL, '34890234809238490'),
-(47, '::1', 'staff@staff.com', '$2y$12$RHPXgho6UJLQWv8W3F9oJekbSnFYXyhNADZvuqaYmGEoUD6Yl1Hd.', 'staff@staff.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1564294648, 1564294659, 1, 'staf', 'staff', NULL, '239423849234890');
+(46, '::1', 'operator@operator.com', '$2y$10$ibxBt.RYG7jib0JxBxB1.usc9pzjqUqPPTvwLgPp1gMRKg6VMLLei', 'operator@operator.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1562178403, 1703301197, 1, 'operator', '2', NULL, '34890234809238490'),
+(47, '::1', 'staff@staff.com', '$2y$12$RHPXgho6UJLQWv8W3F9oJekbSnFYXyhNADZvuqaYmGEoUD6Yl1Hd.', 'staff@staff.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1564294648, 1564294659, 1, 'staf', 'staff', NULL, '239423849234890'),
+(48, '::1', 'rizaldiarief31@gmail.com', '$2y$10$VRZrY4UXVQ7Eb3.RbrYP3eFr0PjxxJ2PX0zd0u.CAuYcVFeMDK1FG', 'rizaldiarief31@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1700489591, NULL, 1, 'rizaldi', 'arief', 'Guru', '083805656183'),
+(49, '::1', 'hafizh@hafizh.com', '$2y$10$N7PoDb4R1v74p2ja2yz2Xek3WX15AYkMgjiDgoglzMv.CeRc9KTMu', 'hafizh@hafizh.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1702090635, 1702095254, 1, 'Hafizh', 'Rahman', 'Guru', '081234567890'),
+(50, '::1', 'siswa@siswi.com', '$2y$10$1p7oeBuuB/4mgWg61B9xn.A4M1dwSJ0JUTa1Dk./NfXneCGNvkJdW', 'siswa@siswi.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1702096602, 1703305585, 1, 'siswa', 'Siswi', 'Guru', '081234567890'),
+(51, '', 'fadhil', 'Password', 'fadhil@fadhil.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -287,7 +362,7 @@ CREATE TABLE `users_groups` (
   `id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
   `group_id` mediumint(8) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `users_groups`
@@ -296,8 +371,11 @@ CREATE TABLE `users_groups` (
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (29, 26, 1),
 (37, 34, 1),
-(49, 46, 3),
-(50, 47, 1);
+(49, 46, 4),
+(50, 47, 1),
+(51, 48, 1),
+(52, 49, 3),
+(53, 50, 3);
 
 --
 -- Indexes for dumped tables
@@ -390,13 +468,13 @@ ALTER TABLE `users_groups`
 -- AUTO_INCREMENT for table `gedung`
 --
 ALTER TABLE `gedung`
-  MODIFY `gedung_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `gedung_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `jabatan`
@@ -408,7 +486,7 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
 
 --
 -- AUTO_INCREMENT for table `kehadiran`
@@ -420,7 +498,7 @@ ALTER TABLE `kehadiran`
 -- AUTO_INCREMENT for table `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `menu`
@@ -432,13 +510,13 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `shift`
 --
 ALTER TABLE `shift`
-  MODIFY `id_shift` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_shift` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `stts`
@@ -450,13 +528,13 @@ ALTER TABLE `stts`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- Constraints for dumped tables
